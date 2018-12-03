@@ -34,7 +34,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
 
     private final Context context;
     private static String PACKAGE_NAME;
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 19;
     private SQLiteDatabase sqLiteDatabase;
     private SQLiteDatabase readableDb;
     private SQLiteDatabase writeableDb;
@@ -84,7 +84,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
             JSONArray jsonArray = new JSONArray(string);
             for(int i = 0; i <= jsonArray.length(); i++){
                 String name = jsonArray.getJSONObject(i).getString("name");
-                String description = jsonArray.getJSONObject(i).getString("description");
+                String description = jsonArray.getJSONObject(i).getString("category");
                 String file = jsonArray.getJSONObject(i).getString("file");
 
                 arrayList.add(new CharaDbHelper.CharaData(name, description, file));
@@ -100,7 +100,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
             ContentValues cv = new ContentValues();
 
             cv.put(CharaContract.CharaEntry.COL_NAME, arrayList.get(i).getName());
-            cv.put(CharaContract.CharaEntry.COL_DESCRIPTION, arrayList.get(i).getDescription());
+            cv.put(CharaContract.CharaEntry.COL_CATEGORY, arrayList.get(i).getDescription());
 
             String fname = arrayList.get(i).getFile();
             int resId = context.getResources().getIdentifier(fname, "drawable", PACKAGE_NAME);
@@ -160,7 +160,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
         int nameIndex = cursor.getColumnIndex(CharaContract.CharaEntry.COL_NAME);
         name = cursor.getString(nameIndex);
 
-        int descriptionIndex = cursor.getColumnIndex(CharaContract.CharaEntry.COL_DESCRIPTION);
+        int descriptionIndex = cursor.getColumnIndex(CharaContract.CharaEntry.COL_CATEGORY);
         description = cursor.getString(descriptionIndex);
 
         int bitmapIndex = cursor.getColumnIndex(CharaContract.CharaEntry.COL_FILE);
@@ -183,7 +183,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
                 CharaContract.CharaEntry.COL_NAME,
                 charaData.getName());
         contentValues.put(
-                CharaContract.CharaEntry.COL_DESCRIPTION,
+                CharaContract.CharaEntry.COL_CATEGORY,
                 charaData.getDescription());
         byte[] bitmapdata = Utils.convertBitmapToByteArray(
                 charaData.getBitmap());
@@ -227,19 +227,19 @@ public class CharaDbHelper extends SQLiteOpenHelper {
     static class CharaData{
 
         private String name;
-        private String description;
+        private String category;
         private String file;
         private Bitmap bitmap;
 
-        public CharaData(String name, String description, String file) {
+        public CharaData(String name, String category, String file) {
             this.name = name;
-            this.description = description;
+            this.category = category;
             this.file = file;
         }
 
-        public CharaData( String name, String description, Bitmap bitmap){
+        public CharaData( String name, String category, Bitmap bitmap){
             this.name = name;
-            this.description = description;
+            this.category = category;
             this.bitmap = bitmap;
         }
 
@@ -248,7 +248,7 @@ public class CharaDbHelper extends SQLiteOpenHelper {
         }
 
         public String getDescription() {
-            return description;
+            return category;
         }
 
         public String getFile() {

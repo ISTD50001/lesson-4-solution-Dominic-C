@@ -1,17 +1,17 @@
 [
   { "name": "Pikachu",
-  "description": "Pokemon",
+  "category": "Pokemon",
   "file": "pikachu"},
   { "name": "Judy Hopps",
-    "description": "Zootopia",
+    "category": "Zootopia",
     "file": "judyhopps"},
   { "name": "Yoda",
-    "description": "Star Wars",
+    "category": "Star Wars",
     "file": "yoda"},
   { "name": "Tom and Jerry",
-    "description": "Tom and Jerry",
+    "category": "Tom and Jerry",
     "file": "tomandjerry"},
   { "name": "Mr Otter",
-    "description": "Marina Bay Otter Show",
+    "category": "Marina Bay Otter Show",
     "file": "marinabayotter"}
 ]

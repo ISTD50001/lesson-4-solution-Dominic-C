@@ -3,6 +3,7 @@ package com.example.norman_lee.displayingdatanew;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -24,7 +25,8 @@ public class RecylerViewActivity extends AppCompatActivity {
         charaDbHelper = CharaDbHelper.createCharaDbHelper(this);
         charaAdapter = new CharaAdapter(this, charaDbHelper);
         recyclerView.setAdapter(charaAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         //TODO 9.8 Put in code to allow each recyclerview item to be deleted when swiped
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback( 0 ,
